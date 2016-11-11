@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>01</title>
+	<script type="text/javascript">
+		let iterator = {
+			i:1,
+			[Symbol.iterator]:function(){
+				return this;
+			},
+			next:function(){
+				return (this.i < 4)? {value:this.i++, done:false} : {value:undefined, done:true};
+			}
+		}
+		
+		for(let value of iterator){
+			console.log(value);
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
