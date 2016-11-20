@@ -5,15 +5,19 @@
 	<title>01</title>
 	<script type="text/javascript">
 		let iterator = {
-			frutes:['사과', '바나나', '포도', '딸기'],
+			fruits:['사과', '바나나', '포도', '딸기'],
 			[Symbol.iterator]:function(){
 				return this;
 			},
 			next:function(){
-				let value = this.frutes.pop();
+				let value = this.fruits.shift();
 				let done = (value) ? false : true;
 				return {value:value, done:done};
 			}
+		}
+		
+		for(let value of iterator){
+			console.log(value);
 		}
 
 		function* gen(){
@@ -23,7 +27,9 @@
 			yield '딸기';
 		}
 
-		
+		for(let value of gen()){
+			console.log(value);
+		}
 	</script>
 </head>
 <body>
