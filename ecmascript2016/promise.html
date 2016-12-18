@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Promise</title>
+	<script type="text/javascript">
+		let p2 = new Promise(function(resolve, reject){
+			let req = new XMLHttpRequest();
+			req.open('GET', 'data.html');
+			req.send();
+			req.onreadystatechange = function(){
+				if(req.readyState == req.DONE){
+					if(req.status == 200){
+						setTimeout(function(){
+							resolve('Success2');
+						}, 1000);
+					} else {
+						reject(req.status);
+					}
+				}
+			}
+		});
+
+		let p1 = new Promise(function(resolve, reject){
+			let req = new XMLHttpRequest();
+			req.open('GET', 'data2.html');
+			req.send();
+			req.onreadystatechange = function(){
+				if(req.readyState == req.DONE){
+					if(req.status == 200){
+						resolve('Success');
+					} else {
+						reject(req.status);
+					}
+				}
+			}
+		});
+		
+		p1.then(function(value){
+			console.log(value);
+		}, function(reason){
+			console.log(reason)
+		});
+
+		// Promise.all([p2, p1]).then(function(value){
+		// 	console.log(value);
+		// }, function(reason){
+		// 	console.log(reason);
+		// });
+	</script>
+</head>
+<body>
+
+</body>
+</html>
