@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reflect</title>
+	<script type="text/javascript">
+	var o = {};
+		var p = new Proxy(o, {
+			  set: function(target, prop, value, receiver) {
+			    console.log("called: " + prop + " = " + value);
+			    return true;
+			  }
+			});
+
+			p.a = 10; // "called: a = 10"
+	console.log(o);
+	
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

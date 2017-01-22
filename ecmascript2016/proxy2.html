@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Proxy2</title>
+	<script type="text/javascript">
+		let p = new Proxy({}, {
+			get:function(tg, prop){
+				console.log(tg, prop);
+			},
+			set:function(tg, prop){
+				console.log(tg, prop);
+			}
+		});
+
+		p.a = 100;
+		console.log(p.a);
+
+		let obj = {
+			set:function(value){
+				this.name = value;
+			}
+		};
+
+		Reflect.set(obj, 'x', 100);
+
+		obj.set(1000);
+
+
+		console.log(obj);
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

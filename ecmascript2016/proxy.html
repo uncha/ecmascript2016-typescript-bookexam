@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Proxy</title>
+	<script type="text/javascript">
+		var obj = {
+			f:function(arr){
+				console.log(this, arr);
+			}
+		};
+
+		//obj.f.apply({a:100}, [1000]);
+
+
+		//Reflect.apply(obj.f, {a:3000}, [1000]);
+
+
+		let proxy = new Proxy(obj,{
+			get:function(tg, prop, receiver){
+				console.log(tg, prop);
+			},
+			set:function(tg, prop, receiver){
+				console.log(tg, prop);
+			}
+		});
+
+
+		proxy.a = 100;
+		proxy.a;
+
+		console.log(obj);
+
+		//console.log(proxy.a);
+
+
+		
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

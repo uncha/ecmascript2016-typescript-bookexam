@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		let proxy = new Proxy(new Date(), {
+			get:function(tg, key, receiver){
+				console.log(key);
+
+				return Reflect.get(tg, key, receiver);
+			}
+		});
+
+		//proxy.aa = 100;
+		let dateProto = proxy.getDay();
+		console.log(dateProto);	
+	</script>
+</head>
+<body>
+
+</body>
+</html>

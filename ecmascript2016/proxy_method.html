@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>proxy method</title>
+	<script type="text/javascript">
+		let obj = function(){
+
+		}
+		obj.__proto__.a = 100;
+		
+		let proxy = new Proxy(obj, {
+			getPrototypeOf:function(target){
+				return Reflect.getPrototypeOf(target);
+			},
+			setPrototypeOf:function(target, value){
+				return Reflect.setPrototypeOf(target, value);
+			},
+			isExtensible:function(target){
+				return Reflect.isExtensible(target);
+			},
+			preventExtensions:function(target){
+				return Reflect.preventExtensions(target);
+			},
+			getOwnPropertyDescriptor:function(target, prop){
+				return Reflect.getOwnPropertyDescriptor(target, prop);
+			},
+			defineProperty:function(target, prop, value){
+				return Reflect.defineProperty(target, prop, value);
+			},
+			has:function(target, prop){
+				return Reflect.has(target, prop);
+			},
+			construct:function(target, args, newTarget){
+				return {
+					getName:function(){
+						return 'proxy';
+					}
+				}
+			}
+		});
+
+		let proto = Object.getPrototypeOf(proxy);
+		console.log(proto);
+
+		Object.setPrototypeOf(proxy, {b:200});
+
+		proto = Object.getPrototypeOf(proxy);
+		console.log(proto);
+
+		let bool = Object.isExtensible(proxy);
+		console.log(bool);
+
+		//Object.preventExtensions(proxy);
+
+		Object.defineProperty(proxy, 'prop', {value:1000, writable:true, enumerble:false, configurable:true});
+		let descriptor = Object.getOwnPropertyDescriptor(proxy, 'prop');
+		console.log(descriptor);
+
+		let has = 'prop' in proxy;
+		console.log(has);
+
+		let p = new proxy();
+		let n = p.getName();
+		console.log(n);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
